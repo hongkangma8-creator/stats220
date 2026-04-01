@@ -1,0 +1,43 @@
+---
+title: My dynamic report
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+library(tidyverse)
+```
+## My Spending Habits
+I tracked my spending for about a week using a Google Form. Each time I made a purchase, I recorded what category it was, how much I spent, and whether it was planned or an impulse buy. This report shows what I found from the data.
+
+```{r load-data}
+survey_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSbvRpsWgdmy787PlcL53MJ-aqF-wNJ_7lBohoySkBWz3DgC_BOfKjJmuwpHlbssB7lxjkfyMAb_JYh/pub?output=csv")
+
+latest_data <- survey_data %>%
+  rename(
+    category = `What did you mainly spend your money on today?`,
+    planned = `Do you think this is an impulse purchase?`
+  )
+category_summary <- latest_data %>%
+  group_by(category) %>%
+  summarise(
+    count = n(),
+    total = sum(`How much money did you spend today? (NZD)`, na.rm = TRUE)
+  )
+ggplot(latest_data, aes(x = category, fill = planned)) +
+  geom_bar() +
+  labs(title = "Purchases by category", x = "Category", y = "Count", fill = "Type") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+ggplot(category_summary, aes(x = category, y = total)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Total spending by category", x = "Category", y = "Total (NZD)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+What I learned
+I had `r nrow(latest_data)` purchases in total.
+
+The average amount I spent was $`r mean(latest_data[["How much money did you spend today? (NZD)"]], na.rm = TRUE) %>% round(2)`.
+
+Food & Dinks was my top category with `r category_summary$count[category_summary$category == "Food & Dinks"]` purchases.
