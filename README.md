@@ -1,11 +1,8 @@
-# stats220
-
-This is my repo for STATS 220. 
-
-A little about me:
-
-- I am undertaking a degree in ....
-- I am taking STATS 220 because ....
-- I am interested in learning about ....
-
-A meme that captures how I currently feel about my university studies is ![](https://c.tenor.com/8druEACXtX8AAAAd/tenor.gif)
+# STATS 220 Project 1
+## My Meme Project
+- This is my first meme
+1. First step
+**bold text**
+*italic text*
+[GitHub](https://github.com/)
+![Cat Typing](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZGt3cWNhcXdhc3g4MDl2ZGlydGxzbGxlaGhldWJwZGJ5dzhib29wNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/mcsPU3SkKrYDdW3aAU/giphy.gif)
